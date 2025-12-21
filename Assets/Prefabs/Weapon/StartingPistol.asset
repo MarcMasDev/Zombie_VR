@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: StartingPistol
   m_EditorClassIdentifier: Assembly-CSharp::WeaponClass
   damage: 25
-  projectileSpeed: 100
+  projectileSpeed: 30
   headshotMultiplier: 2
+  limbMultiplier: 0.75
   fireMode: 0
-  fireRate: 10
+  fireRate: 30
   burstCount: 3
-  magazineSize: 30
+  magazineSize: 10
   reloadTime: 2

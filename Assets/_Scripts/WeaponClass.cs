@@ -14,6 +14,7 @@ public class WeaponClass : ScriptableObject
     public float damage = 25f;
     public float projectileSpeed = 100f;
     public float headshotMultiplier = 2f;
+    public float limbMultiplier = 0.75f;
 
     [Header("Fire")]
     public FireMode fireMode = FireMode.SemiAuto;

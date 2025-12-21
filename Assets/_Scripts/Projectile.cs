@@ -24,22 +24,54 @@ public class Projectile : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.collider.CompareTag("Weapon")) return;
+
         IDamageable damageable = collision.collider.GetComponentInParent<IDamageable>();
+
         if (damageable != null)
         {
-            damageable.TakeDamage(weapon.damage);
-
-            for (int i = 0; i < bloodVFXs.Length; i++)
-            {
-                Instantiate(bloodVFXs[i], transform.position, Quaternion.LookRotation(collision.contacts[0].normal));
-            }
+            damageable.TakeDamage(GetDamage(collision.collider.GetComponent<Hitbox>()));
+            ApplyBloodVFX(collision.contacts[0].normal, collision.transform);
         }
         else
         {
-            for (int i = 0; i < impactVFXs.Length; i++)
+            ApplyGenericVFX(collision.contacts[0].normal, collision.transform);
+        }
+
+        Destroy(gameObject);
+    }
+    private float GetDamage(Hitbox hitbox)
+    {
+        float finalDamage = weapon.damage;
+
+        if (hitbox != null)
+        {
+            if(hitbox.hitboxType == HitboxType.Head)
             {
-                Instantiate(impactVFXs[i], transform.position, Quaternion.LookRotation(collision.contacts[0].normal));
+                finalDamage *= weapon.headshotMultiplier;
             }
+            else if (hitbox.hitboxType == HitboxType.Limb)
+            {
+                finalDamage *= weapon.limbMultiplier;
+            }
+        }
+        return finalDamage;
+    }
+
+    private void ApplyBloodVFX(Vector3 rot, Transform parent)
+    {
+        for (int i = 0; i < bloodVFXs.Length; i++)
+        {
+            Instantiate(bloodVFXs[i], transform.position, Quaternion.LookRotation(rot))
+                .transform.SetParent(parent);
+        }
+    }
+    private void ApplyGenericVFX(Vector3 rot, Transform parent)
+    {
+        for (int i = 0; i < impactVFXs.Length; i++)
+        {
+            Instantiate(impactVFXs[i], transform.position, Quaternion.LookRotation(rot))
+                .transform.SetParent(parent);
         }
     }
 }

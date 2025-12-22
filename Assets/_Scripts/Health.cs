@@ -6,14 +6,16 @@ public interface IDamageable
 
 public class Health : MonoBehaviour, IDamageable
 {
-    [SerializeField] private float maxHealth = 100f;
+    public float maxHealth = 100f;
     private float currentHealth;
     private Animator animator;
     private RagdollAgent ragdoll;
 
     private void Awake()
     {
+        maxHealth = GameManager.Instance.GetZombieHealth();
         currentHealth = maxHealth;
+
         animator = GetComponent<Animator>();
         ragdoll = GetComponent<RagdollAgent>();
     }
@@ -34,5 +36,6 @@ public class Health : MonoBehaviour, IDamageable
     private void Die()
     {
         ragdoll.EnableRagdoll();
+        GameManager.Instance.UnregisterZombie();
     }
 }

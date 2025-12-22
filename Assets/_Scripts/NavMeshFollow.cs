@@ -7,11 +7,12 @@ public class NavMeshFollow : MonoBehaviour
     private Transform player;
 
     [Header("Chase Settings")]
-    public float chaseRange = 10f;
     public float stopDistance = 1.5f;
 
 
     private Animator animator;
+
+    private int speedAnimatorSetter = 0;
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -19,37 +20,19 @@ public class NavMeshFollow : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         agent.stoppingDistance = stopDistance;
+        animator.SetFloat("Velocity", GenerateRandomVelocity());
     }
 
     private void Update()
     {
         if (!agent.enabled) return;
 
-        float distance = agent.remainingDistance;
+        bool stop = agent.remainingDistance <= stopDistance;
+        agent.isStopped = stop;
+        agent.updateRotation = !stop;
+        animator.SetBool("Attack", stop);
 
-        if (distance <= stopDistance && agent.hasPath)
-        {
-            agent.isStopped = true;
-            agent.updateRotation = false;
-            animator.SetBool("Attack", true);
-
-            FacePlayer();
-        }
-        else if (Vector3.Distance(transform.position, player.position) <= chaseRange)
-        {
-            agent.isStopped = false;
-            agent.updateRotation = true;
-            agent.SetDestination(player.position);
-            animator.SetBool("Attack", false);
-        }
-        else
-        {
-            agent.isStopped = true;
-            agent.updateRotation = true;
-            animator.SetBool("Attack", false);
-        }
-
-        animator.SetFloat("Velocity", GetVelocity());
+        if (stop) FacePlayer();
     }
 
     private void FacePlayer()
@@ -64,9 +47,12 @@ public class NavMeshFollow : MonoBehaviour
         }
     }
 
-    private float GetVelocity()
+    private int GenerateRandomVelocity()
     {
-        if (agent.speed >= 1) return 1; return 0;
+        if (agent.speed <= 1)
+        {
+            return Random.Range(0, 3);
+        }
+        return Random.Range(3, 5);
     }
-
 }

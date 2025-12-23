@@ -10,6 +10,18 @@ public class Shoot : MonoBehaviour
     [SerializeField] private Projectile projectile;
     [SerializeField] private Transform firePoint;
 
+    [Header("Recoil Settings")]
+    [SerializeField] private Transform gunTransform;
+    [SerializeField] private float recoilAmount = 0.05f;
+    [SerializeField] private float recoilRecoverySpeed = 5f;
+    private Vector3 currentRecoil;
+    private Vector3 recoilVelocity;
+
+
+    [Header("Haptic Settings")]
+    [SerializeField] private float hapticAmplitude = 0.3f;
+    [SerializeField] private float hapticDuration = 0.1f;
+
 
     private int currentAmmo;
     private bool isReloading;
@@ -30,7 +42,10 @@ public class Shoot : MonoBehaviour
 
         currentAmmo = equippedWeapon.magazineSize;
     }
-
+    private void Update()
+    {
+        RecoverRecoil();
+    }
     public void OnTriggerPressed()
     {
         if (isReloading)
@@ -79,13 +94,17 @@ public class Shoot : MonoBehaviour
             emptyMagAudio.Play();
             return;
         }
-
-        shootParticles.Play();
-        shootAudio.Play();
         Projectile spawnedProjectile = Instantiate(projectile, firePoint.position, transform.rotation);
         spawnedProjectile.Fire(equippedWeapon, firePoint.forward);
 
         currentAmmo--;
+        ApplyAmmoVisuals();
+
+        //Feedback
+        ApplyRecoil();
+        shootParticles.Play();
+        shootAudio.Play();
+
         nextFireTime = Time.time + (1f / equippedWeapon.fireRate);
     }
 
@@ -120,7 +139,6 @@ public class Shoot : MonoBehaviour
                 break;
 
             ShootWeapon();
-            currentAmmo--;
 
             yield return new WaitForSeconds(1f / equippedWeapon.fireRate);
         }
@@ -137,7 +155,6 @@ public class Shoot : MonoBehaviour
         while (isFiring)
         {
             ShootWeapon();
-            currentAmmo--;
 
             yield return new WaitForSeconds(delay);
         }
@@ -146,5 +163,26 @@ public class Shoot : MonoBehaviour
     private void StopFiring()
     {
         isFiring = false;
+    }
+
+    private void RecoverRecoil()
+    {
+        currentRecoil = Vector3.SmoothDamp(currentRecoil, Vector3.zero, ref recoilVelocity, 1f / recoilRecoverySpeed);
+        gunTransform.localRotation = Quaternion.Euler(currentRecoil);
+    }
+
+    private void ApplyRecoil()
+    {
+        //Randomized small recoil per shot
+        float x = Random.Range(-0.5f, 0.5f);
+        float y = recoilAmount;
+        currentRecoil += new Vector3(-y, x, 0);
+    }
+
+    public void ApplyAmmoVisuals(bool dropped = false)
+    {
+        AmmoManager.Instance.UpdateAmmoManager(currentAmmo, equippedWeapon.magazineSize);
+
+        if (dropped) AmmoManager.Instance.UpdateAmmoManager(0, 1);
     }
 }

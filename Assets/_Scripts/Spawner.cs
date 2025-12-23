@@ -21,9 +21,12 @@ public class Spawner : MonoBehaviour
 
     private void SpawnZombie()
     {
-        Instantiate(GetRandomSpeedPrefab(), transform.position, Quaternion.identity).GetComponent<Health>();
+        if (GameManager.Instance.CanSpawnZombie())
+        {
+            Instantiate(GetRandomSpeedPrefab(), transform.position, Quaternion.identity).GetComponent<Health>();
 
-        GameManager.Instance.RegisterZombie();
+            GameManager.Instance.RegisterZombie();
+        }
     }
 
     private GameObject GetRandomSpeedPrefab()

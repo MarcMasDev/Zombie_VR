@@ -1,7 +1,7 @@
 using UnityEngine;
 public interface IDamageable
 {
-    void TakeDamage(float amount);
+    void TakeDamage(float amount, HitboxType hitbox);
 }
 
 public class Health : MonoBehaviour, IDamageable
@@ -20,11 +20,15 @@ public class Health : MonoBehaviour, IDamageable
         ragdoll = GetComponent<RagdollAgent>();
     }
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(float amount, HitboxType hitbox)
     {
         currentHealth -= amount;
+        bool death = currentHealth <= 0;
 
-        if (currentHealth <= 0)
+
+        ScoreManager.Instance.AddPoints(hitbox, death);
+
+        if (death)
         {
             Die();
             return;

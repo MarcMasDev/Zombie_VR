@@ -17,8 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float runnerChanceGrowthMultiplier = 1.2f; 
     [SerializeField] private float maxRunnerChance = 0.9f; 
 
-
-    private int round = 1;
+    private int round = 0;
     private int zombiesSpawnedThisRound;
     private int zombiesThisRound;
     private int zombiesAlive;
@@ -30,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     public bool CanSpawnZombie()
     {
-        return zombiesAlive < maxAliveZombies;
+        return zombiesAlive < maxAliveZombies && zombiesAlive < zombiesThisRound;
     }
 
     public void RegisterZombie()
@@ -38,6 +37,7 @@ public class GameManager : MonoBehaviour
         zombiesAlive++;
         zombiesSpawnedThisRound++;
     }
+
     public void UnregisterZombie()
     {
         zombiesAlive--;

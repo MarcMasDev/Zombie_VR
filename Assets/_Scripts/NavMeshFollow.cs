@@ -27,10 +27,13 @@ public class NavMeshFollow : MonoBehaviour
     {
         if (!agent.enabled) return;
 
+        agent.SetDestination(player.position);
+
         bool stop = agent.remainingDistance <= stopDistance;
         agent.isStopped = stop;
         agent.updateRotation = !stop;
         animator.SetBool("Attack", stop);
+
 
         if (stop) FacePlayer();
     }

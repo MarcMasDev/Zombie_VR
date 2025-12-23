@@ -30,7 +30,10 @@ public class Projectile : MonoBehaviour
 
         if (damageable != null)
         {
-            damageable.TakeDamage(GetDamage(collision.collider.GetComponent<Hitbox>()));
+            if (!collision.collider.TryGetComponent<Hitbox>(out var h)) return;
+
+            HitboxType hitbox = h.hitboxType;
+            damageable.TakeDamage(GetDamage(hitbox), hitbox);
             ApplyBloodVFX(collision.contacts[0].normal, collision.transform);
         }
         else
@@ -40,21 +43,19 @@ public class Projectile : MonoBehaviour
 
         Destroy(gameObject);
     }
-    private float GetDamage(Hitbox hitbox)
+    private float GetDamage(HitboxType hitbox)
     {
         float finalDamage = weapon.damage;
 
-        if (hitbox != null)
+        if (hitbox == HitboxType.Head)
         {
-            if(hitbox.hitboxType == HitboxType.Head)
-            {
-                finalDamage *= weapon.headshotMultiplier;
-            }
-            else if (hitbox.hitboxType == HitboxType.Limb)
-            {
-                finalDamage *= weapon.limbMultiplier;
-            }
+            finalDamage *= weapon.headshotMultiplier;
         }
+        else if (hitbox == HitboxType.Limb)
+        {
+            finalDamage *= weapon.limbMultiplier;
+        }
+
         return finalDamage;
     }
 

@@ -33,5 +33,7 @@ public class RagdollAgent : MonoBehaviour
         {
             rb.isKinematic = false;
         }
+
+        Destroy(gameObject, 5);
     }
 }

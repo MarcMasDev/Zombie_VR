@@ -10,13 +10,6 @@ public class Shoot : MonoBehaviour
     [SerializeField] private Projectile projectile;
     [SerializeField] private Transform firePoint;
 
-    [Header("Recoil Settings")]
-    [SerializeField] private Transform gunTransform;
-    [SerializeField] private float recoilAmount = 0.05f;
-    [SerializeField] private float recoilRecoverySpeed = 5f;
-    private Vector3 currentRecoil;
-    private Vector3 recoilVelocity;
-
 
     [Header("Haptic Settings")]
     [SerializeField] private float hapticAmplitude = 0.3f;
@@ -41,10 +34,6 @@ public class Shoot : MonoBehaviour
         mainCamera = Camera.main;
 
         currentAmmo = equippedWeapon.magazineSize;
-    }
-    private void Update()
-    {
-        RecoverRecoil();
     }
     public void OnTriggerPressed()
     {
@@ -101,7 +90,6 @@ public class Shoot : MonoBehaviour
         ApplyAmmoVisuals();
 
         //Feedback
-        ApplyRecoil();
         shootParticles.Play();
         shootAudio.Play();
 
@@ -163,20 +151,6 @@ public class Shoot : MonoBehaviour
     private void StopFiring()
     {
         isFiring = false;
-    }
-
-    private void RecoverRecoil()
-    {
-        currentRecoil = Vector3.SmoothDamp(currentRecoil, Vector3.zero, ref recoilVelocity, 1f / recoilRecoverySpeed);
-        gunTransform.localRotation = Quaternion.Euler(currentRecoil);
-    }
-
-    private void ApplyRecoil()
-    {
-        //Randomized small recoil per shot
-        float x = Random.Range(-0.5f, 0.5f);
-        float y = recoilAmount;
-        currentRecoil += new Vector3(-y, x, 0);
     }
 
     public void ApplyAmmoVisuals(bool dropped = false)

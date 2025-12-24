@@ -4850,6 +4850,7 @@ GameObject:
   - component: {fileID: 4095172493104798753}
   - component: {fileID: 7872904012030121394}
   - component: {fileID: 1799775014741992634}
+  - component: {fileID: 72370803096354543}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -4995,6 +4996,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.019999998, y: 0.019999998, z: 0.025128111}
   m_Center: {x: 0, y: 0, z: 0.0025640554}
+--- !u!114 &72370803096354543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4351148633017846342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c063998ace76e5241a1f7a144367faba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DestroyAfterTime
+  m_Time: 5
 --- !u!1 &6879240756493998774
 GameObject:
   m_ObjectHideFlags: 0

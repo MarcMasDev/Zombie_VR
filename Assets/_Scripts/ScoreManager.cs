@@ -1,10 +1,13 @@
 using TMPro;
 using UnityEngine;
+using DamageNumbersPro;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
     [SerializeField] private TMP_Text scoreDisplayer;
+    [SerializeField] private DamageNumber floatingText;
+    [SerializeField] private Transform numberSpawnPoint;
 
     [Header("Score Settings")]
     [SerializeField] private int pointsPerImpact = 10;
@@ -19,24 +22,32 @@ public class ScoreManager : MonoBehaviour
     }
     public void AddPoints(HitboxType hitboxType, bool death = false)
     {
+        int currentPoints = 0;
         int pointsMultiplier = 1;
         if (doublePoints) pointsMultiplier = 2;
 
-        if (!death) points += pointsPerImpact * pointsMultiplier;
+        if (!death) currentPoints = pointsPerImpact * pointsMultiplier;
         else
         {
             switch (hitboxType)
             {
                 case HitboxType.Head:
-                    points += pointsPerHeadshot * pointsMultiplier;
+                    currentPoints = pointsPerHeadshot * pointsMultiplier;
                     break;
                 default:
-                    points += pointsPerKill * pointsMultiplier;
+                    currentPoints = pointsPerKill * pointsMultiplier;
                     break;
             }
         }
 
+        points += currentPoints;
         scoreDisplayer.text = points.ToString("N0");
+        SpawnPoints(currentPoints);
     }
 
+    private void SpawnPoints(int pointsToShow)
+    {
+        floatingText.Spawn(numberSpawnPoint.position, pointsToShow).transform.SetParent(numberSpawnPoint);
+
+    }
 }

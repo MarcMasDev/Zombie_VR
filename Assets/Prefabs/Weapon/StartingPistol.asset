@@ -17,7 +17,7 @@ MonoBehaviour:
   headshotMultiplier: 2
   limbMultiplier: 0.75
   fireMode: 0
-  fireRate: 30
+  fireRate: 5
   burstCount: 3
   magazineSize: 10
   reloadTime: 2

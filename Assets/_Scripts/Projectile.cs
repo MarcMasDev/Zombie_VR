@@ -12,12 +12,11 @@ public class Projectile : MonoBehaviour
     [Header("Impact VFX")]
     [SerializeField] private GameObject[] impactVFXs;
 
-    public void Fire(WeaponClass weapon, Vector3 dir)
+    public virtual void Fire(WeaponClass weapon, Vector3 dir)
     {
         this.weapon = weapon;
 
-        if (rb == null) rb = GetComponent<Rigidbody>();
-        if (rb != null)
+        if (rb == null && TryGetComponent<Rigidbody>(out rb))
         {
             rb.linearVelocity = dir * weapon.projectileSpeed;
         }

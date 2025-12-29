@@ -16,4 +16,10 @@ public class AmmoManager : MonoBehaviour
         scoreDisplayer.text = currentAmmo.ToString("N0");
         fill.fillAmount = currentAmmo / (float)maxAmmo;
     }
+
+    public void UpdateAmmoManagerFloat(float currentAmmo, float maxAmmo)
+    {
+        scoreDisplayer.text = currentAmmo.ToString("N0");
+        fill.fillAmount = currentAmmo / maxAmmo;
+    }
 }

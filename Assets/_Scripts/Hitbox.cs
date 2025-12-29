@@ -4,7 +4,8 @@ public enum HitboxType
 {
     Body,
     Head,
-    Limb
+    Limb,
+    Fire
 }
 
 public class Hitbox : MonoBehaviour

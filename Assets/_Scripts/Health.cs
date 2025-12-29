@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 public interface IDamageable
 {
@@ -11,6 +12,13 @@ public class Health : MonoBehaviour, IDamageable
     private Animator animator;
     private RagdollAgent ragdoll;
 
+    //Fire
+    [SerializeField] private ParticleSystem fireEffect;
+    [HideInInspector] public bool fire = false;
+    [SerializeField] private float fireDuration = 3f;
+    private float noFireDuration = 0;
+    private float fireDamagePercentage = 0;
+    private float fireTickTimer = 0;
     private void Awake()
     {
         maxHealth = GameManager.Instance.GetZombieHealth();
@@ -19,9 +27,18 @@ public class Health : MonoBehaviour, IDamageable
         animator = GetComponent<Animator>();
         ragdoll = GetComponent<RagdollAgent>();
     }
-
     public void TakeDamage(float amount, HitboxType hitbox)
     {
+        if (hitbox == HitboxType.Fire)
+        {
+            noFireDuration = 0;
+            fireDamagePercentage = amount;
+            fire = true;
+            return;
+        }
+
+
+
         currentHealth -= amount;
         bool death = currentHealth <= 0;
 
@@ -39,7 +56,32 @@ public class Health : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        fireEffect.Stop();
         ragdoll.EnableRagdoll();
         GameManager.Instance.UnregisterZombie();
+    }
+
+    private void Update()
+    {
+        if (fire) HandleFire();
+    }
+    private void HandleFire()
+    {
+        if (!fireEffect.isPlaying)
+            fireEffect.Play();
+
+        fireTickTimer += Time.deltaTime;
+        noFireDuration += Time.deltaTime;
+        if (fireTickTimer >= 1f)
+        {
+            fireTickTimer = 0f;
+            TakeDamage(maxHealth * (fireDamagePercentage / 100f), HitboxType.Body);
+        }
+
+        if (noFireDuration > fireDuration)
+        {
+            fire = false;
+            fireEffect.Stop();
+        }
     }
 }

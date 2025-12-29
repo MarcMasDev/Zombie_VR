@@ -15,10 +15,11 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private int pointsPerKill = 50;
 
     public bool doublePoints = false;
-    private int points = 0;
+    private int points = 500;
     void Awake()
     {
         Instance = this;
+        scoreDisplayer.text = points.ToString("N0");
     }
     public void AddPoints(HitboxType hitboxType, bool death = false)
     {
@@ -49,5 +50,16 @@ public class ScoreManager : MonoBehaviour
     {
         floatingText.Spawn(numberSpawnPoint.position, pointsToShow).transform.SetParent(numberSpawnPoint);
 
+    }
+
+    public bool CheckAndApplyAmount(int amount)
+    {
+        if (amount <= points)
+        {
+            points -= amount; 
+            scoreDisplayer.text = points.ToString("N0");
+            return true;
+        }
+        return false;
     }
 }

@@ -2,18 +2,26 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    [SerializeField] private Transform[] spawners;
+
     [SerializeField] private GameObject[] zombieWalkerPrefabs;
     [SerializeField] private GameObject[] zombieRunnerPrefabs;
 
-    public float spawnDelay = 2f;
+    [SerializeField] private Vector2 randomSpawnDelay;
+    private float spawnDelay;
     private float timer;
 
+    private void Start()
+    {
+        SetRandomSpawntime();
+    }
     private void Update()
     {
         timer += Time.deltaTime;
 
         if (timer >= spawnDelay && GameManager.Instance.CanSpawnZombie())
         {
+            SetRandomSpawntime();
             SpawnZombie();
             timer = 0f;
         }
@@ -21,12 +29,9 @@ public class Spawner : MonoBehaviour
 
     private void SpawnZombie()
     {
-        if (GameManager.Instance.CanSpawnZombie())
-        {
-            Instantiate(GetRandomSpeedPrefab(), transform.position, Quaternion.identity).GetComponent<Health>();
+        Instantiate(GetRandomSpeedPrefab(), GetRandomSpawnPoint(), Quaternion.identity).GetComponent<Health>();
 
-            GameManager.Instance.RegisterZombie();
-        }
+        GameManager.Instance.RegisterZombie();
     }
 
     private GameObject GetRandomSpeedPrefab()
@@ -37,5 +42,13 @@ public class Spawner : MonoBehaviour
         }
 
         return zombieWalkerPrefabs[Random.Range(0, zombieWalkerPrefabs.Length)];
+    }
+    private Vector3 GetRandomSpawnPoint()
+    {
+        return spawners[Random.Range(0, spawners.Length)].position;
+    }
+    private void SetRandomSpawntime()
+    {
+        spawnDelay = Random.Range(randomSpawnDelay.x, randomSpawnDelay.y);
     }
 }

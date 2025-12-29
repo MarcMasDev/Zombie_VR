@@ -12,14 +12,10 @@ public class Projectile : MonoBehaviour
     [Header("Impact VFX")]
     [SerializeField] private GameObject[] impactVFXs;
 
-    public virtual void Fire(WeaponClass weapon, Vector3 dir)
+    public void Fire(WeaponClass weapon, Vector3 dir)
     {
         this.weapon = weapon;
-
-        if (rb == null && TryGetComponent<Rigidbody>(out rb))
-        {
-            rb.linearVelocity = dir * weapon.projectileSpeed;
-        }
+        rb.linearVelocity = dir * weapon.projectileSpeed;
     }
     private void OnCollisionEnter(Collision collision)
     {

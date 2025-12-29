@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    [SerializeField] private TMP_Text roundVisualizer;
 
     [Header("Base Values")]
     [SerializeField] private int baseZombiesPerRound = 20;
@@ -29,21 +31,28 @@ public class GameManager : MonoBehaviour
 
     public bool CanSpawnZombie()
     {
-        return zombiesAlive < maxAliveZombies && zombiesAlive < zombiesThisRound;
+        return zombiesAlive < maxAliveZombies && zombiesSpawnedThisRound < zombiesThisRound;
     }
 
     public void RegisterZombie()
     {
         zombiesAlive++;
+        print("Hey! I'm registering a new zombie. The total of zombies alive is: " + zombiesAlive);
+
         zombiesSpawnedThisRound++;
+        print("And remember I can spawn up to " + zombiesThisRound + " right now I have spawned " + zombiesSpawnedThisRound + " already!");
     }
 
     public void UnregisterZombie()
     {
         zombiesAlive--;
+        print("Nice! You killed a zombie. The total of zombies alive is: " + zombiesAlive);
 
         if (zombiesSpawnedThisRound >= zombiesThisRound && zombiesAlive <= 0)
         {
+            print("Hi! I'm starting a new round because: /n " +
+                "Zombies spawner this round (" + zombiesSpawnedThisRound + ") is greater or equal to the zombies I had to spawn (" + zombiesThisRound + ") /n" +
+                "And guess what! The zombies alive (" + zombiesAlive + ") was lower than 0!!! This means I can start a new round");
             StartNextRound();
         }
     }
@@ -51,6 +60,7 @@ public class GameManager : MonoBehaviour
     {
         round++;
         zombiesSpawnedThisRound = 0;
+        roundVisualizer.text = round.ToString("N0");
         CalculateZombiesThisRound();
     }
 

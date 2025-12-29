@@ -83,6 +83,7 @@ public class Shoot : MonoBehaviour
             emptyMagAudio.Play();
             return;
         }
+
         Projectile spawnedProjectile = Instantiate(projectile, firePoint.position, transform.rotation);
         spawnedProjectile.Fire(equippedWeapon, firePoint.forward);
 

@@ -29,7 +29,7 @@ public class Health : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float amount, HitboxType hitbox)
     {
-        if (hitbox == HitboxType.Fire)
+        if (hitbox == HitboxType.Fire && !isDeath)
         {
             noFireDuration = 0;
             fireDamagePercentage = amount;
@@ -37,11 +37,11 @@ public class Health : MonoBehaviour, IDamageable
             return;
         }
 
+        if (fire) currentHealth -= maxHealth * (amount / 100f);
+        else currentHealth -= amount;
 
 
-        currentHealth -= amount;
         bool death = currentHealth <= 0;
-
 
         ScoreManager.Instance.AddPoints(hitbox, death);
 
@@ -54,11 +54,16 @@ public class Health : MonoBehaviour, IDamageable
         if (animator) animator.SetTrigger("Hit");
     }
 
+    private bool isDeath = false;
     private void Die()
     {
         fireEffect.Stop();
-        ragdoll.EnableRagdoll();
-        GameManager.Instance.UnregisterZombie();
+        if (!isDeath)
+        {
+            isDeath = true;
+            ragdoll.EnableRagdoll();
+            GameManager.Instance.UnregisterZombie();
+        }
     }
 
     private void Update()
@@ -75,7 +80,7 @@ public class Health : MonoBehaviour, IDamageable
         if (fireTickTimer >= 1f)
         {
             fireTickTimer = 0f;
-            TakeDamage(maxHealth * (fireDamagePercentage / 100f), HitboxType.Body);
+            TakeDamage(fireDamagePercentage, HitboxType.Body);
         }
 
         if (noFireDuration > fireDuration)

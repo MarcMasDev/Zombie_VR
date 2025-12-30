@@ -1,5 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit.Feedback;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class Shoot : MonoBehaviour
 {
@@ -8,13 +12,13 @@ public class Shoot : MonoBehaviour
     [Header("Weapon Settings")]
     [SerializeField] private WeaponClass equippedWeapon;
     [SerializeField] private Projectile projectile;
-    [SerializeField] private Transform firePoint;
+    [SerializeField] private GunRecoil recoil;
+    [SerializeField] private Transform[] firePoints;
 
 
     [Header("Haptic Settings")]
-    [SerializeField] private float hapticAmplitude = 0.3f;
-    [SerializeField] private float hapticDuration = 0.1f;
-
+    [SerializeField] private HapticImpulseData hapticData;
+    private XRGrabInteractable controller;
 
     private int currentAmmo;
     private bool isReloading;
@@ -25,16 +29,19 @@ public class Shoot : MonoBehaviour
     [Header("Audio Settings")]
     [SerializeField] private AudioSource emptyMagAudio;
     [SerializeField] private AudioSource shootAudio;
+    [SerializeField] private AudioSource reloadAudio;
 
     [Header("Particle Settings")]
     [SerializeField] private ParticleSystem shootParticles;
-
+    private bool grabbed = false;
     private void Awake()
     {
         mainCamera = Camera.main;
 
         currentAmmo = equippedWeapon.magazineSize;
+        controller = GetComponent<XRGrabInteractable>();
     }
+
     public void OnTriggerPressed()
     {
         if (isReloading)
@@ -84,38 +91,22 @@ public class Shoot : MonoBehaviour
             return;
         }
 
-        Projectile spawnedProjectile = Instantiate(projectile, firePoint.position, transform.rotation);
-        spawnedProjectile.Fire(equippedWeapon, firePoint.forward);
+        for (int i = 0; i < firePoints.Length; i++)
+        {
+            Projectile spawnedProjectile = Instantiate(projectile, firePoints[i].position, firePoints[i].rotation);
+            spawnedProjectile.Fire(equippedWeapon, firePoints[i].forward);
+        }
 
         currentAmmo--;
         ApplyAmmoVisuals();
 
         //Feedback
+        recoil.Fire();
         shootParticles.Play();
         shootAudio.Play();
+        SendHaptics();
 
         nextFireTime = Time.time + (1f / equippedWeapon.fireRate);
-    }
-
-    public void Reload()
-    {
-        if (isReloading)
-            return;
-
-        StartCoroutine(ReloadAsync());
-    }
-
-    private IEnumerator ReloadAsync()
-    {
-        if (isReloading || currentAmmo == equippedWeapon.magazineSize)
-            yield break;
-
-        isReloading = true;
-
-        yield return new WaitForSeconds(equippedWeapon.reloadTime);
-
-        currentAmmo = equippedWeapon.magazineSize;
-        isReloading = false;
     }
 
     private IEnumerator BurstFire()
@@ -156,8 +147,64 @@ public class Shoot : MonoBehaviour
 
     public void ApplyAmmoVisuals(bool dropped = false)
     {
+        grabbed = !dropped;
         AmmoManager.Instance.UpdateAmmoManager(currentAmmo, equippedWeapon.magazineSize);
 
         if (dropped) AmmoManager.Instance.UpdateAmmoManager(0, 1);
+    }
+
+    void SendHaptics()
+    {
+        float ammoRatio = (float)currentAmmo / equippedWeapon.magazineSize;
+
+        foreach (var interactor in controller.interactorsSelecting)
+        {
+            var feedback = interactor.transform.GetComponentInChildren<SimpleHapticFeedback>();
+            HapticImpulseData finalHapticData = new HapticImpulseData();
+            finalHapticData.duration = hapticData.duration;
+            finalHapticData.amplitude = hapticData.amplitude * ammoRatio;
+            finalHapticData.frequency = hapticData.frequency;
+
+            feedback?.SendHapticImpulse(finalHapticData);
+        }
+    }
+
+    [SerializeField] private InputActionReference reloadAction;
+
+    private void OnEnable()
+    {
+        reloadAction.action.Enable();
+    }
+
+    private void OnDisable()
+    {
+        reloadAction.action.Disable();
+    }
+
+    private void Update()
+    {
+        if (grabbed && !isReloading && currentAmmo < equippedWeapon.magazineSize)
+        {
+            if (reloadAction.action.WasPressedThisFrame() || currentAmmo <= 0) Reload();
+        }
+    }
+
+    public void Reload()
+    {
+        if (isReloading)
+            return;
+
+        StartCoroutine(ReloadAsync());
+    }
+    private IEnumerator ReloadAsync()
+    {
+        isReloading = true;
+        reloadAudio.Play();
+
+        yield return new WaitForSeconds(equippedWeapon.reloadTime);
+
+        currentAmmo = equippedWeapon.magazineSize;
+        ApplyAmmoVisuals(false);
+        isReloading = false;
     }
 }

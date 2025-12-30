@@ -1,0 +1,46 @@
+{
+    "version": 1,
+    "name": "XRWeaponInput",
+    "maps": [
+        {
+            "name": "Weapon",
+            "id": "44585a0a-77e7-4bed-bc30-d58d9650db41",
+            "actions": [
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "f7b1ad9e-b040-4b09-859a-279b18bb88b2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3869eea0-b089-4752-955d-6cc9b03432da",
+                    "path": "<XRController>{RightHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "95831399-1323-41c9-933c-3c3516f8cb67",
+                    "path": "<XRController>{LeftHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

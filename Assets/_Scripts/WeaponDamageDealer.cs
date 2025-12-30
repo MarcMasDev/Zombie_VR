@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Feedback;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class WeaponDamageDealer : MonoBehaviour
 {
@@ -41,7 +43,11 @@ public class WeaponDamageDealer : MonoBehaviour
     {
         if (grabbed)
         {
-            if (shooting) currentAmmo -= Time.deltaTime*fillSpeed;
+            if (shooting)
+            {
+                currentAmmo -= Time.deltaTime * fillSpeed; 
+                SendHaptics();
+            }
             if (currentAmmo <= 0) SetShoot(false);
 
             AmmoManager.Instance.UpdateAmmoManagerFloat(currentAmmo, maxAmmo);
@@ -61,5 +67,24 @@ public class WeaponDamageDealer : MonoBehaviour
         if (!shooting) return;
 
         damageable.TakeDamage(damage, HitboxType.Fire);
+    }
+
+    [Header("Haptic Settings")]
+    [SerializeField] private HapticImpulseData hapticData;
+    [SerializeField] private XRGrabInteractable controller;
+    void SendHaptics()
+    {
+        float ammoRatio = (float)currentAmmo / maxAmmo;
+
+        foreach (var interactor in controller.interactorsSelecting)
+        {
+            var feedback = interactor.transform.GetComponentInChildren<SimpleHapticFeedback>();
+            HapticImpulseData finalHapticData = new HapticImpulseData();
+            finalHapticData.duration = hapticData.duration;
+            finalHapticData.amplitude = hapticData.amplitude * ammoRatio;
+            finalHapticData.frequency = hapticData.frequency;
+
+            feedback?.SendHapticImpulse(finalHapticData);
+        }
     }
 }

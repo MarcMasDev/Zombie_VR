@@ -18,11 +18,15 @@ public class Purchasable : MonoBehaviour
         if (other.CompareTag("Watch"))
         {
             bool checkPurchase = ScoreManager.Instance.CheckAndApplyAmount(cost);
-            for (int i = 0; i < anim.Length; i++)
-            {
-                anim[i].SetBool("Purchase", checkPurchase);
-                anim[i].SetTrigger("TryPurchase");
-            }
+            SetAnimators(checkPurchase);
+        }
+    }
+    public void SetAnimators(bool purchased)
+    {
+        for (int i = 0; i < anim.Length; i++)
+        {
+            anim[i].SetBool("Purchase", purchased);
+            if (purchased) anim[i].SetTrigger("TryPurchase");
         }
     }
 }

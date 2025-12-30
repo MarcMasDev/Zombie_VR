@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class WeaponRandomizer : MonoBehaviour
 {
+    [SerializeField] private Purchasable purchasable;
+
     [Header("Visuals")]
     [SerializeField] private GameObject[] weaponsVisuals;
     [SerializeField] private float timeBetweenWeapons = 0.25f;
-    [SerializeField] private int maxWeaponsToShow = 25;
+    [SerializeField] private int maxWeaponsToShow = 12;
 
 
     [Header("Spawn")]
@@ -18,6 +20,8 @@ public class WeaponRandomizer : MonoBehaviour
     private bool randomizing = false;
     public void StartRandomize()
     {
+        if (randomizing) return;
+
         randomizing = true;
         index = Random.Range(0, weaponsVisuals.Length);
         StartCoroutine(ShowRandomWeapons());
@@ -42,10 +46,13 @@ public class WeaponRandomizer : MonoBehaviour
             index = (index + 1) % weaponsVisuals.Length;
             weaponsShown++;
         }
+        weaponsVisuals[index].SetActive(true);
     }
     private void SpawnRandomWeapon()
     {
-        Rigidbody weapon = Instantiate(weaponsToSpawn[Random.Range(0, weaponsToSpawn.Length)], 
+        purchasable.SetAnimators(false);
+        weaponsVisuals[index].SetActive(false);
+        Rigidbody weapon = Instantiate(weaponsToSpawn[index], 
             spawnPoint.position, spawnPoint.rotation).GetComponent<Rigidbody>();
 
         weapon.linearVelocity = spawnPoint.forward * spawnForce;

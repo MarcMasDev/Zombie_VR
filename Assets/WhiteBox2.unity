@@ -2385,7 +2385,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.019000053, y: -0.38200003, z: 0.08170986}
-  m_LocalScale: {x: 1.9832, y: 2.1115, z: 0.50245}
+  m_LocalScale: {x: 2.2529151, y: 2.1115, z: 0.50245}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1539554323}
@@ -7976,9 +7976,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 594478441}
-  - component: {fileID: 594478442}
   m_Layer: 0
-  m_Name: Pivot
+  m_Name: StartingPistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8004,21 +8003,6 @@ Transform:
   - {fileID: 446562722}
   m_Father: {fileID: 2054432164}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &594478442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 594478440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58945d97826dc2e4394b08f74a9e6f60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GunRecoil
-  kickBack: 0.15
-  rotationKick: 30
-  returnSpeed: 25
 --- !u!1 &595476440
 GameObject:
   m_ObjectHideFlags: 0
@@ -9819,9 +9803,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 833939525}
-  - component: {fileID: 833939526}
   m_Layer: 0
-  m_Name: Pivot (7)
+  m_Name: Revolver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9836,8 +9819,8 @@ Transform:
   m_GameObject: {fileID: 833939524}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00000022966202, y: -0.7071075, z: 0.00000014786858, w: 0.7071061}
-  m_LocalPosition: {x: -0.08799982, y: 0.097, z: -0.23000002}
-  m_LocalScale: {x: 0.32999998, y: 0.32999998, z: 0.32999998}
+  m_LocalPosition: {x: -0.23009, y: 0.096225, z: -0.23192}
+  m_LocalScale: {x: 0.37900496, y: 0.37900496, z: 0.37900496}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2088067596}
@@ -9864,21 +9847,6 @@ Transform:
   - {fileID: 869275403}
   m_Father: {fileID: 2054432164}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &833939526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 833939524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58945d97826dc2e4394b08f74a9e6f60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GunRecoil
-  kickBack: 0.4
-  rotationKick: 40
-  returnSpeed: 25
 --- !u!1 &844524367
 GameObject:
   m_ObjectHideFlags: 0
@@ -11470,9 +11438,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 980261902}
-  - component: {fileID: 980261903}
   m_Layer: 0
-  m_Name: Pivot (2)
+  m_Name: Auto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11487,7 +11454,7 @@ Transform:
   m_GameObject: {fileID: 980261901}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00000022966202, y: -0.7071075, z: 0.00000014786858, w: 0.7071061}
-  m_LocalPosition: {x: -0.08799982, y: 0.097, z: -0.23000002}
+  m_LocalPosition: {x: -0.119, y: 0.097, z: -0.23}
   m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11508,21 +11475,6 @@ Transform:
   - {fileID: 984353995}
   m_Father: {fileID: 2054432164}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &980261903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 980261901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58945d97826dc2e4394b08f74a9e6f60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GunRecoil
-  kickBack: 0.25
-  rotationKick: 25
-  returnSpeed: 25
 --- !u!1 &984353994
 GameObject:
   m_ObjectHideFlags: 0
@@ -12252,9 +12204,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1029967565}
-  - component: {fileID: 1029967566}
   m_Layer: 0
-  m_Name: Pivot (1)
+  m_Name: Burst
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12269,7 +12220,7 @@ Transform:
   m_GameObject: {fileID: 1029967564}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0006908902, y: -0.70710725, z: -0.000690364, w: 0.7071057}
-  m_LocalPosition: {x: -0.08799982, y: 0.097, z: -0.23000002}
+  m_LocalPosition: {x: -0.402, y: 0.097, z: -0.23}
   m_LocalScale: {x: 0.5499999, y: 0.5499999, z: 0.55}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12288,21 +12239,6 @@ Transform:
   - {fileID: 1332526363}
   m_Father: {fileID: 2054432164}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: -0.112}
---- !u!114 &1029967566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1029967564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58945d97826dc2e4394b08f74a9e6f60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GunRecoil
-  kickBack: 0.25
-  rotationKick: 25
-  returnSpeed: 25
 --- !u!1 &1033342364
 GameObject:
   m_ObjectHideFlags: 0
@@ -14955,9 +14891,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1244163512}
-  - component: {fileID: 1244163513}
   m_Layer: 0
-  m_Name: Pivot (3)
+  m_Name: Sniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14972,8 +14907,8 @@ Transform:
   m_GameObject: {fileID: 1244163511}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00000022966202, y: -0.7071075, z: 0.00000014786858, w: 0.7071061}
-  m_LocalPosition: {x: -0.08799982, y: 0.097, z: -0.23000002}
-  m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
+  m_LocalPosition: {x: -0.092814, y: 0.098441, z: -0.22845}
+  m_LocalScale: {x: 0.507221, y: 0.507221, z: 0.507221}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 134115626}
@@ -14991,21 +14926,6 @@ Transform:
   - {fileID: 394087470}
   m_Father: {fileID: 2054432164}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &1244163513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1244163511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58945d97826dc2e4394b08f74a9e6f60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GunRecoil
-  kickBack: 0.4
-  rotationKick: 40
-  returnSpeed: 25
 --- !u!1 &1255254894
 GameObject:
   m_ObjectHideFlags: 0
@@ -17722,7 +17642,7 @@ Transform:
   m_GameObject: {fileID: 1539554321}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.452, y: 1.23, z: 2.197}
+  m_LocalPosition: {x: -6.653, y: 1.23, z: 2.197}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -17745,6 +17665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f2b8c2f538e2524a95202955bcb0961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  purchasable: {fileID: 37222006}
   weaponsVisuals:
   - {fileID: 594478440}
   - {fileID: 1029967564}
@@ -17756,17 +17677,17 @@ MonoBehaviour:
   - {fileID: 833939524}
   - {fileID: 1995588324}
   timeBetweenWeapons: 0.25
-  maxWeaponsToShow: 25
+  maxWeaponsToShow: 12
   weaponsToSpawn:
-  - {fileID: 619067344975659413, guid: 0da1fef2ada917f47b3f165450c20413, type: 3}
-  - {fileID: 4209786871047240863, guid: 18e28c32244eaca449f4a8a4a057941f, type: 3}
+  - {fileID: 3654848054879878451, guid: f14c8be0e9bf60348a86b951eb29498e, type: 3}
   - {fileID: 2572384215958525503, guid: c7dc3ecd459907745912f9bb9e23836e, type: 3}
-  - {fileID: 4237829080031552837, guid: 0e47316fe03bbc945904d69a722ce283, type: 3}
+  - {fileID: 619067344975659413, guid: 0da1fef2ada917f47b3f165450c20413, type: 3}
+  - {fileID: 3903315801549119458, guid: 167c09bee14759f44b5a8f6b2a2b4b27, type: 3}
+  - {fileID: 4209786871047240863, guid: 18e28c32244eaca449f4a8a4a057941f, type: 3}
+  - {fileID: 6289871901223822312, guid: aba633486534a7648b6236fae07ff769, type: 3}
   - {fileID: 2882718767686284984, guid: 7bf355015fa11f044930f33b3bfa7dc3, type: 3}
   - {fileID: 3063780102876689449, guid: a1a299873a2fc604b9e5512bf1782758, type: 3}
-  - {fileID: 6289871901223822312, guid: aba633486534a7648b6236fae07ff769, type: 3}
-  - {fileID: 3903315801549119458, guid: 167c09bee14759f44b5a8f6b2a2b4b27, type: 3}
-  - {fileID: 3654848054879878451, guid: f14c8be0e9bf60348a86b951eb29498e, type: 3}
+  - {fileID: 4237829080031552837, guid: 0e47316fe03bbc945904d69a722ce283, type: 3}
   spawnPoint: {fileID: 2074578277}
   spawnForce: 5
 --- !u!1 &1550675206
@@ -19703,9 +19624,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1647491368}
-  - component: {fileID: 1647491369}
   m_Layer: 0
-  m_Name: Pivot (6)
+  m_Name: MPK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19720,7 +19640,7 @@ Transform:
   m_GameObject: {fileID: 1647491367}
   serializedVersion: 2
   m_LocalRotation: {x: 0.047678847, y: -0.70549804, z: -0.047678486, w: 0.705497}
-  m_LocalPosition: {x: -0.08799982, y: 0.10645902, z: -0.25894773}
+  m_LocalPosition: {x: -0.189, y: 0.10645902, z: -0.259}
   m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19728,21 +19648,6 @@ Transform:
   - {fileID: 1777465954}
   m_Father: {fileID: 2054432164}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: -7.733}
---- !u!114 &1647491369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1647491367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58945d97826dc2e4394b08f74a9e6f60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GunRecoil
-  kickBack: 0.4
-  rotationKick: 40
-  returnSpeed: 25
 --- !u!1 &1667176072
 GameObject:
   m_ObjectHideFlags: 0
@@ -22216,9 +22121,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1827821524}
-  - component: {fileID: 1827821525}
   m_Layer: 0
-  m_Name: Pivot (5)
+  m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22244,21 +22148,6 @@ Transform:
   - {fileID: 1048843257}
   m_Father: {fileID: 2054432164}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &1827821525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1827821523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58945d97826dc2e4394b08f74a9e6f60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GunRecoil
-  kickBack: 0.4
-  rotationKick: 40
-  returnSpeed: 25
 --- !u!1 &1830600765
 GameObject:
   m_ObjectHideFlags: 0
@@ -24050,7 +23939,7 @@ Transform:
   m_GameObject: {fileID: 1986377327}
   serializedVersion: 2
   m_LocalRotation: {x: -0.008446198, y: -0, z: -0, w: 0.99996436}
-  m_LocalPosition: {x: 0.732, y: -0.426, z: 0.151}
+  m_LocalPosition: {x: 0.97, y: 0.152, z: 0.141}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24141,7 +24030,7 @@ GameObject:
   - component: {fileID: 1995588327}
   - component: {fileID: 1995588326}
   m_Layer: 0
-  m_Name: c_flamethrower_reference.007
+  m_Name: Flamethrower
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24156,7 +24045,7 @@ Transform:
   m_GameObject: {fileID: 1995588324}
   serializedVersion: 2
   m_LocalRotation: {x: -0.49999946, y: -0.5000006, z: -0.5000005, w: 0.49999958}
-  m_LocalPosition: {x: -0.08799982, y: 0.097, z: -0.23000002}
+  m_LocalPosition: {x: 0.159, y: 0.097, z: -0.23}
   m_LocalScale: {x: 0.97455996, y: 0.97455996, z: 0.97455996}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25069,7 +24958,7 @@ Transform:
   m_GameObject: {fileID: 2054432163}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.152, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25098,9 +24987,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2059690373}
-  - component: {fileID: 2059690374}
   m_Layer: 0
-  m_Name: Pivot (4)
+  m_Name: Ballista
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25115,7 +25003,7 @@ Transform:
   m_GameObject: {fileID: 2059690372}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00000022966202, y: -0.7071075, z: 0.00000014786858, w: 0.7071061}
-  m_LocalPosition: {x: -0.08799982, y: 0.097, z: -0.23000002}
+  m_LocalPosition: {x: 0.057, y: 0.053, z: -0.23}
   m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25128,21 +25016,6 @@ Transform:
   - {fileID: 1906213271}
   m_Father: {fileID: 2054432164}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &2059690374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2059690372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58945d97826dc2e4394b08f74a9e6f60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GunRecoil
-  kickBack: 0.4
-  rotationKick: 40
-  returnSpeed: 25
 --- !u!1 &2060311203
 GameObject:
   m_ObjectHideFlags: 0
@@ -25513,7 +25386,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: e19b5bb6cb8e91e43b1b5d81a069296f, type: 3}
+  - {fileID: 880774007180850119, guid: 726758c028d7cd94881c50e48c3147ed, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

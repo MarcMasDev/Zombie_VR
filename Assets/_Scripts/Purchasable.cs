@@ -7,7 +7,7 @@ public class Purchasable : MonoBehaviour
     [SerializeField] private TMP_Text costDisplay;
 
     [SerializeField] private Animator[] anim;
-
+    public bool waitForAction = false;
 
     private void Awake()
     {
@@ -17,6 +17,8 @@ public class Purchasable : MonoBehaviour
     {
         if (other.CompareTag("Watch"))
         {
+            if (waitForAction) return;
+
             bool checkPurchase = ScoreManager.Instance.CheckAndApplyAmount(cost);
             SetAnimators(checkPurchase);
         }

@@ -13,6 +13,7 @@ public class Shoot : MonoBehaviour
     [SerializeField] private WeaponClass equippedWeapon;
     [SerializeField] private Projectile projectile;
     [SerializeField] private GunRecoil recoil;
+    [SerializeField] private Transform ammoPlacement;
     [SerializeField] private Transform[] firePoints;
 
 
@@ -28,7 +29,7 @@ public class Shoot : MonoBehaviour
 
     [Header("Audio Settings")]
     [SerializeField] private AudioSource emptyMagAudio;
-    [SerializeField] private AudioSource shootAudio;
+    [SerializeField] private AudioSource[] shootAudio;
     [SerializeField] private AudioSource reloadAudio;
 
     [Header("Particle Settings")]
@@ -98,12 +99,17 @@ public class Shoot : MonoBehaviour
         }
 
         currentAmmo--;
-        ApplyAmmoVisuals();
+        UpdateAmmoVisuals();
 
         //Feedback
         recoil.Fire();
         shootParticles.Play();
-        shootAudio.Play();
+
+        for (int i = 0; i < shootAudio.Length; i++)
+        {
+            shootAudio[i].Play();
+        }
+
         SendHaptics();
 
         nextFireTime = Time.time + (1f / equippedWeapon.fireRate);
@@ -143,14 +149,6 @@ public class Shoot : MonoBehaviour
     private void StopFiring()
     {
         isFiring = false;
-    }
-
-    public void ApplyAmmoVisuals(bool dropped = false)
-    {
-        grabbed = !dropped;
-        AmmoManager.Instance.UpdateAmmoManager(currentAmmo, equippedWeapon.magazineSize);
-
-        if (dropped) AmmoManager.Instance.UpdateAmmoManager(0, 1);
     }
 
     void SendHaptics()
@@ -204,7 +202,18 @@ public class Shoot : MonoBehaviour
         yield return new WaitForSeconds(equippedWeapon.reloadTime);
 
         currentAmmo = equippedWeapon.magazineSize;
-        ApplyAmmoVisuals(false);
+        UpdateAmmoVisuals();
         isReloading = false;
+    }
+
+    public void ApplyAmmoVisuals(bool dropped = false)
+    {
+        grabbed = !dropped;
+        AmmoManager.Instance.UpdateAmmoManager(currentAmmo, equippedWeapon.magazineSize, grabbed, ammoPlacement);
+    }
+
+    public void UpdateAmmoVisuals()
+    {
+        AmmoManager.Instance.UpdateAmmoManager(currentAmmo, equippedWeapon.magazineSize);
     }
 }

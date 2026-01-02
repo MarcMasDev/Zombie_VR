@@ -10,6 +10,7 @@ public class WeaponDamageDealer : MonoBehaviour
     [SerializeField] private float maxAmmo = 2f;
     [SerializeField] private AudioSource sound;
     [SerializeField] private ParticleSystem particle;
+    [SerializeField] private Transform ammoPos;
 
     private bool shooting = false;
     private bool grabbed = false;
@@ -32,12 +33,9 @@ public class WeaponDamageDealer : MonoBehaviour
     {
         grabbed = grab;
 
-        if (!grab)
-        {
-            AmmoManager.Instance.UpdateAmmoManager(0, 1);
-            SetShoot(false);
-        }
-        else AmmoManager.Instance.UpdateAmmoManagerFloat(currentAmmo, maxAmmo);
+        if (!grab) SetShoot(false);
+
+        AmmoManager.Instance.UpdateAmmoManager(currentAmmo, maxAmmo, grab, ammoPos);
     }
     private void Update()
     {
@@ -50,7 +48,7 @@ public class WeaponDamageDealer : MonoBehaviour
             }
             if (currentAmmo <= 0) SetShoot(false);
 
-            AmmoManager.Instance.UpdateAmmoManagerFloat(currentAmmo, maxAmmo);
+            AmmoManager.Instance.UpdateAmmoManager(currentAmmo, maxAmmo);
         }
         
         if (!shooting)

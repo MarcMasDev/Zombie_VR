@@ -22,12 +22,14 @@ public class WeaponRandomizer : MonoBehaviour
     {
         if (randomizing) return;
 
+        print("START");
         randomizing = true;
         index = Random.Range(0, weaponsVisuals.Length);
         StartCoroutine(ShowRandomWeapons());
     }
     public void EndRandomize()
     {
+        print("END");
         randomizing = false;
         SpawnRandomWeapon();
     }
@@ -50,11 +52,11 @@ public class WeaponRandomizer : MonoBehaviour
     }
     private void SpawnRandomWeapon()
     {
-        purchasable.SetAnimators(false);
         weaponsVisuals[index].SetActive(false);
         Rigidbody weapon = Instantiate(weaponsToSpawn[index], 
             spawnPoint.position, spawnPoint.rotation).GetComponent<Rigidbody>();
 
         weapon.linearVelocity = spawnPoint.forward * spawnForce;
+        purchasable.SetAnimators(false);
     }
 }

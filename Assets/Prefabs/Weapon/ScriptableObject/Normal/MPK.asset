@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f94f6c39e46eec242b8d8a50db8fcc18, type: 3}
   m_Name: MPK
   m_EditorClassIdentifier: Assembly-CSharp::WeaponClass
-  weaponID: 4
   damage: 25
   projectileSpeed: 100
   headshotMultiplier: 2
@@ -20,5 +19,5 @@ MonoBehaviour:
   fireMode: 1
   fireRate: 8
   burstCount: 3
-  magazineSize: 500
+  magazineSize: 20
   reloadTime: 2

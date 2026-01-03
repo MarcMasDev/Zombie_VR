@@ -85,4 +85,9 @@ public class WeaponDamageDealer : MonoBehaviour
             feedback?.SendHapticImpulse(finalHapticData);
         }
     }
+
+    private void OnDestroy()
+    {
+        AmmoManager.Instance.ResetParent();
+    }
 }

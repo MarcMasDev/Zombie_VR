@@ -32,7 +32,11 @@ public class AmmoManager : MonoBehaviour
         else ammoVisualizer.gameObject.SetActive(false);
 
     }
-
+    public void ResetParent()
+    {
+        ammoVisualizer.SetParent(null);
+        ammoVisualizer.gameObject.SetActive(false);
+    }
     private void SetInfo(float currentAmmo, float maxAmmo)
     {
         scoreDisplayer.text = currentAmmo.ToString("N0");

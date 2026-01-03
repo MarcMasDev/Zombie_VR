@@ -216,4 +216,9 @@ public class Shoot : MonoBehaviour
     {
         AmmoManager.Instance.UpdateAmmoManager(currentAmmo, equippedWeapon.magazineSize);
     }
+
+    private void OnDestroy()
+    {
+        AmmoManager.Instance.ResetParent();
+    }
 }

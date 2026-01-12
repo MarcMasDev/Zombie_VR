@@ -368,6 +368,7 @@ GameObject:
   - component: {fileID: 8772934323669391606}
   - component: {fileID: 303384106728859591}
   - component: {fileID: 6657226786507270639}
+  - component: {fileID: 3100033654768553070}
   m_Layer: 0
   m_Name: FlameThrower 1
   m_TagString: Weapon
@@ -620,6 +621,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.07835721, y: 0.2873703, z: 1.3115754}
   m_Center: {x: 0.014178603, y: 0.14131483, z: -0.12784383}
+--- !u!114 &3100033654768553070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4237829080031552837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc853a1a13915f46bae6824b6d78c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponID
+  id: 4
 --- !u!1 &4819320809664802017
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,6 +799,7 @@ MonoBehaviour:
   sound: {fileID: 4571514653174657823}
   particle: {fileID: 8622319431543873878}
   ammoPos: {fileID: 8323465522174936895}
+  weaponID: {fileID: 0}
   hapticData:
     m_Amplitude: 0.637
     m_Duration: 0.2

@@ -11,6 +11,7 @@ public class WeaponDamageDealer : MonoBehaviour
     [SerializeField] private AudioSource sound;
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private Transform ammoPos;
+    [SerializeField] private WeaponID weaponID;
 
     private bool shooting = false;
     private bool grabbed = false;
@@ -35,7 +36,8 @@ public class WeaponDamageDealer : MonoBehaviour
 
         if (!grab) SetShoot(false);
 
-        AmmoManager.Instance.UpdateAmmoManager(currentAmmo, maxAmmo, grab, ammoPos);
+        if (grab) AmmoManager.Instance.UpdateAmmoManager(currentAmmo, maxAmmo, weaponID, ammoPos);
+        else AmmoManager.Instance.ResetParent(weaponID);
     }
     private void Update()
     {
@@ -48,7 +50,7 @@ public class WeaponDamageDealer : MonoBehaviour
             }
             if (currentAmmo <= 0) SetShoot(false);
 
-            AmmoManager.Instance.UpdateAmmoManager(currentAmmo, maxAmmo);
+            AmmoManager.Instance.UpdateAmmoManager(currentAmmo, maxAmmo, weaponID);
         }
         
         if (!shooting)
@@ -84,10 +86,5 @@ public class WeaponDamageDealer : MonoBehaviour
 
             feedback?.SendHapticImpulse(finalHapticData);
         }
-    }
-
-    private void OnDestroy()
-    {
-        AmmoManager.Instance.ResetParent();
     }
 }

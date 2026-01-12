@@ -7,15 +7,13 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class Shoot : MonoBehaviour
 {
-    private Camera mainCamera;
-
     [Header("Weapon Settings")]
     [SerializeField] private WeaponClass equippedWeapon;
     [SerializeField] private Projectile projectile;
     [SerializeField] private GunRecoil recoil;
     [SerializeField] private Transform ammoPlacement;
     [SerializeField] private Transform[] firePoints;
-
+    private WeaponID id;
 
     [Header("Haptic Settings")]
     [SerializeField] private HapticImpulseData hapticData;
@@ -37,10 +35,9 @@ public class Shoot : MonoBehaviour
     private bool grabbed = false;
     private void Awake()
     {
-        mainCamera = Camera.main;
-
         currentAmmo = equippedWeapon.magazineSize;
         controller = GetComponent<XRGrabInteractable>();
+        id = GetComponent<WeaponID>();
     }
 
     public void OnTriggerPressed()
@@ -206,19 +203,32 @@ public class Shoot : MonoBehaviour
         isReloading = false;
     }
 
+    private int grabHandsAmount = 0;
     public void ApplyAmmoVisuals(bool dropped = false)
     {
         grabbed = !dropped;
-        AmmoManager.Instance.UpdateAmmoManager(currentAmmo, equippedWeapon.magazineSize, grabbed, ammoPlacement);
+        if (grabbed)
+        {
+            if (grabHandsAmount <= 0)
+            {
+                grabHandsAmount = 1;
+                AmmoManager.Instance.UpdateAmmoManager(currentAmmo, equippedWeapon.magazineSize, id, ammoPlacement);
+            }
+            grabHandsAmount++;
+        }
+        else
+        {
+            grabHandsAmount--;
+            if (grabHandsAmount <= 1)
+            {
+                grabHandsAmount = 0;
+                AmmoManager.Instance.ResetParent(id);
+            }
+        }
     }
 
     public void UpdateAmmoVisuals()
     {
-        AmmoManager.Instance.UpdateAmmoManager(currentAmmo, equippedWeapon.magazineSize);
-    }
-
-    private void OnDestroy()
-    {
-        AmmoManager.Instance.ResetParent();
+        AmmoManager.Instance.UpdateAmmoManager(currentAmmo, equippedWeapon.magazineSize, id);
     }
 }

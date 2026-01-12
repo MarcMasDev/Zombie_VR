@@ -20,13 +20,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float maxRunnerChance = 0.9f; 
 
     private int round = 0;
+    public int GetRound() => round;
+
     private int zombiesSpawnedThisRound;
     private int zombiesThisRound;
     private int zombiesAlive;
     void Awake()
     {
         Instance = this;
-        StartNextRound();
     }
 
     public bool CanSpawnZombie()
@@ -47,21 +48,22 @@ public class GameManager : MonoBehaviour
     {
         zombiesAlive--;
         print("Nice! You killed a zombie. The total of zombies alive is: " + zombiesAlive);
-
-        if (zombiesSpawnedThisRound >= zombiesThisRound && zombiesAlive <= 0)
-        {
-            print("Hi! I'm starting a new round because: /n " +
-                "Zombies spawner this round (" + zombiesSpawnedThisRound + ") is greater or equal to the zombies I had to spawn (" + zombiesThisRound + ") /n" +
-                "And guess what! The zombies alive (" + zombiesAlive + ") was lower than 0!!! This means I can start a new round");
-            StartNextRound();
-        }
     }
-    private void StartNextRound()
+    public int StartNextRound()
     {
-        round++;
-        zombiesSpawnedThisRound = 0;
-        roundVisualizer.text = round.ToString("N0");
-        CalculateZombiesThisRound();
+        if ((zombiesSpawnedThisRound >= zombiesThisRound && zombiesAlive <= 0) ||round == 0)
+        {
+            print("Hi! I'm starting a new round because you activated the trigger and: /n " +
+                "Zombies spawned this round (" + zombiesSpawnedThisRound + ") is greater or equal to the zombies I had to spawn (" + zombiesThisRound + ") /n" +
+                "And guess what! The zombies alive (" + zombiesAlive + ") was lower than 0!!! This means I can start a new round");
+            round++;
+            zombiesSpawnedThisRound = 0;
+            roundVisualizer.text = round.ToString("N0");
+            CalculateZombiesThisRound(); 
+            return round;
+        }
+
+        return -1;
     }
 
     private void CalculateZombiesThisRound()
@@ -77,4 +79,5 @@ public class GameManager : MonoBehaviour
     {
         return Mathf.Min(baseRunnerChance * Mathf.Pow(runnerChanceGrowthMultiplier, round - 1), maxRunnerChance);
     }
+
 }

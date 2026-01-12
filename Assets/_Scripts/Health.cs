@@ -29,6 +29,8 @@ public class Health : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float amount, HitboxType hitbox)
     {
+        if (isDeath) return;
+
         if (hitbox == HitboxType.Fire && !isDeath)
         {
             noFireDuration = 0;

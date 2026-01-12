@@ -1502,7 +1502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunRecoil
   kickBack: 0.2
-  rotationKick: 15
+  rotationKick: 3
   returnSpeed: 25
 --- !u!1 &4935123220604597001
 GameObject:

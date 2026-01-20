@@ -611,7 +611,7 @@ GameObject:
   - component: {fileID: 5511157744531011877}
   - component: {fileID: 5607784224679347903}
   - component: {fileID: 1288060186092697634}
-  - component: {fileID: 7690308190993051096}
+  - component: {fileID: 3050822591762697978}
   m_Layer: 9
   m_Name: Screen
   m_TagString: Untagged
@@ -690,8 +690,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7690308190993051096
-CapsuleCollider:
+--- !u!65 &3050822591762697978
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -708,11 +708,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 3
+  m_Size: {x: 1.0000001, y: 2.0000014, z: 1.6730846}
+  m_Center: {x: 0.000000048378546, y: 0.0009785639, z: 0.03701148}
 --- !u!1 &3898388475877681776
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,7 +760,7 @@ MonoBehaviour:
   - {fileID: 4734898560057814961}
   - {fileID: 1951695244828138995}
   - {fileID: 1793541243596541721}
-  - {fileID: 7690308190993051096}
+  - {fileID: 3050822591762697978}
   - {fileID: 5338851311941378905}
   canvas: {fileID: 2683085257657995437}
   currentAmmoText: {fileID: 3543391606504732220}

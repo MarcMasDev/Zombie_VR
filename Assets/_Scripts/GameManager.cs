@@ -118,6 +118,20 @@ public class GameManager : MonoBehaviour
         if (gunsGrabbed < 0) gunsGrabbed = 0;
         else if (gunsGrabbed > 2) gunsGrabbed = 2;
     }
+    private bool paused = false;
+    public void PauseGame()
+    {
+        if (paused)
+        {
+            Time.timeScale = 1;
+            paused = false;
+        }
+        else
+        {
+            paused = true;
+            Time.timeScale = 0;
+        }
+    }
 
     public void ReloadScene()
     {

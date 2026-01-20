@@ -25347,71 +25347,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4422535878737164, guid: 1c84920a311cf3b429209e6741616a98, type: 3}
   m_PrefabInstance: {fileID: 1258645099}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1261814158
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2515768170576621210, guid: 1375aa37d350e3644a88ce327f7c20be, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 6728784818506517148}
-    - target: {fileID: 2656931662878017311, guid: 1375aa37d350e3644a88ce327f7c20be, type: 3}
-      propertyPath: m_Name
-      value: GunAmmo (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3887022522347862447, guid: 1375aa37d350e3644a88ce327f7c20be, type: 3}
-      propertyPath: m_InteractionManager
-      value: 
-      objectReference: {fileID: 2922040091884438875}
-    - target: {fileID: 6464908172990367316, guid: 1375aa37d350e3644a88ce327f7c20be, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.17484087
-      objectReference: {fileID: 0}
-    - target: {fileID: 6464908172990367316, guid: 1375aa37d350e3644a88ce327f7c20be, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.1871685
-      objectReference: {fileID: 0}
-    - target: {fileID: 6464908172990367316, guid: 1375aa37d350e3644a88ce327f7c20be, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 49.893005
-      objectReference: {fileID: 0}
-    - target: {fileID: 6464908172990367316, guid: 1375aa37d350e3644a88ce327f7c20be, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6464908172990367316, guid: 1375aa37d350e3644a88ce327f7c20be, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6464908172990367316, guid: 1375aa37d350e3644a88ce327f7c20be, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.000034391876
-      objectReference: {fileID: 0}
-    - target: {fileID: 6464908172990367316, guid: 1375aa37d350e3644a88ce327f7c20be, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6464908172990367316, guid: 1375aa37d350e3644a88ce327f7c20be, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6464908172990367316, guid: 1375aa37d350e3644a88ce327f7c20be, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6464908172990367316, guid: 1375aa37d350e3644a88ce327f7c20be, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1375aa37d350e3644a88ce327f7c20be, type: 3}
 --- !u!1 &1262025216
 GameObject:
   m_ObjectHideFlags: 0
@@ -41452,8 +41387,7 @@ MonoBehaviour:
   moveTransform: {fileID: 8259319816372202505}
   verticalOffset: -0.5
   rotationSpeed: 10
-  lockVerticalPosition: 0
-  moveThreshold: 0.1
+  moveThreshold: 0.01
 --- !u!1 &1956662663
 GameObject:
   m_ObjectHideFlags: 0
@@ -48678,6 +48612,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Clock_Small Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ddce88a67534fb64f8f6da2de042386a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ddce88a67534fb64f8f6da2de042386a, type: 3}
       propertyPath: m_RootOrder
       value: 70
@@ -51230,7 +51168,7 @@ RectTransform:
   m_LocalRotation: {x: 0.1344427, y: -0.35580233, z: -0.017572906, w: 0.9246735}
   m_LocalPosition: {x: 0, y: 0, z: 0.14}
   m_LocalScale: {x: 0.002, y: 0.002, z: 0.002}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 563129457}
   - {fileID: 7880867045758192041}
@@ -52381,7 +52319,6 @@ SceneRoots:
   - {fileID: 1459774426}
   - {fileID: 836418180}
   - {fileID: 1975181259}
-  - {fileID: 1261814158}
   - {fileID: 816557476}
   - {fileID: 1925728311}
   - {fileID: 1195085601}

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class SetRoundVisualizer : MonoBehaviour
 {
     private Text t;
-    private void Awake()
+    private void Start()
     {
         t = GetComponent<Text>(); 
         if (t != null) t.text = "Round: " + GameManager.Instance.GetRound().ToString("N0");

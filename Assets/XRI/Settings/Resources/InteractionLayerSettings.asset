@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.InteractionLayerSettings
   m_LayerNames:
   - Default
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Magazine
+  - Weapon
+  - Watch
+  - Ammo
+  - Belt
+  - MagazineAuto
+  - MagazineBallista
+  - MagazineBurst
+  - MagazineMPK
+  - MagazineRevolver
+  - MagazineShotgun
+  - MagazineSniper
   - 
   - 
   - 

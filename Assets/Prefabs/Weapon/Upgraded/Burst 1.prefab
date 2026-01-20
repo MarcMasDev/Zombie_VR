@@ -854,6 +854,7 @@ GameObject:
   - component: {fileID: 2227421017813478795}
   - component: {fileID: 7544812983806506968}
   - component: {fileID: 1273042461716318292}
+  - component: {fileID: 3591262571930344690}
   m_Layer: 0
   m_Name: Burst 1
   m_TagString: Weapon
@@ -1135,7 +1136,6 @@ MonoBehaviour:
   equippedWeapon: {fileID: 11400000, guid: b1c8526e47d04b74b983630d23df02f3, type: 2}
   projectile: {fileID: 4095172493104798753, guid: e9b5a80ee7a61274aa80d87cf5939d1e, type: 3}
   recoil: {fileID: 5348425106906681714}
-  ammoPlacement: {fileID: 8333365149379020733}
   firePoints:
   - {fileID: 2268645734566706082}
   hapticData:
@@ -1146,9 +1146,20 @@ MonoBehaviour:
   shootAudio:
   - {fileID: 8919895669025636361}
   - {fileID: 5229307200126156795}
-  reloadAudio: {fileID: 2515599349262787293}
   shootParticles: {fileID: 2555954845189141310}
-  reloadAction: {fileID: 5508348191298240105, guid: 3bf2864b2979c68438e3e3330e4fd782, type: 3}
+--- !u!114 &3591262571930344690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2572384215958525503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc853a1a13915f46bae6824b6d78c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponID
+  id: 3
 --- !u!1 &2702994931138828795
 GameObject:
   m_ObjectHideFlags: 0

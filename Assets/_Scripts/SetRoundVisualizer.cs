@@ -1,23 +1,20 @@
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SetRoundVisualizer : MonoBehaviour
 {
-    [SerializeField] private TMP_Text roundText;
-    [SerializeField] private Animator animator;
-
-    public void StartRound()
+    private Text t;
+    private void Awake()
     {
-        int currentRound = GameManager.Instance.StartNextRound();
-
-        if (currentRound == -1)
-        {
-            animator.SetBool("Condition", false);
-        }
-        else
-        {
-            animator.SetBool("Condition", true);
-            roundText.text = currentRound.ToString();
-        }
+        t = GetComponent<Text>(); 
+        if (t != null) t.text = "Round: " + GameManager.Instance.GetRound().ToString("N0");
+    }
+    private void OnEnable()
+    {
+        if (t != null) t.text = "Round: " + GameManager.Instance.GetRound().ToString("N0");
+    }
+    private void Update()
+    {
+        if (t != null) t.text = "Round: " + GameManager.Instance.GetRound().ToString("N0");
     }
 }

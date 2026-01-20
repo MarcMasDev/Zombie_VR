@@ -574,6 +574,7 @@ GameObject:
   - component: {fileID: 2758167705540138767}
   - component: {fileID: 5504997838842426809}
   - component: {fileID: 3530482180451022633}
+  - component: {fileID: 6882124539250478598}
   m_Layer: 0
   m_Name: MPK 1
   m_TagString: Weapon
@@ -855,7 +856,6 @@ MonoBehaviour:
   equippedWeapon: {fileID: 11400000, guid: a5407686b84a51e49b869e344651ab55, type: 2}
   projectile: {fileID: 4095172493104798753, guid: e9b5a80ee7a61274aa80d87cf5939d1e, type: 3}
   recoil: {fileID: 1526466722774982240}
-  ammoPlacement: {fileID: 8595330089325310195}
   firePoints:
   - {fileID: 6751100593052420915}
   hapticData:
@@ -866,9 +866,20 @@ MonoBehaviour:
   shootAudio:
   - {fileID: 3595398443749069377}
   - {fileID: 6867867569640378024}
-  reloadAudio: {fileID: 6269724545500715471}
   shootParticles: {fileID: 1028508969503573900}
-  reloadAction: {fileID: 5508348191298240105, guid: 3bf2864b2979c68438e3e3330e4fd782, type: 3}
+--- !u!114 &6882124539250478598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2882718767686284984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc853a1a13915f46bae6824b6d78c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponID
+  id: 5
 --- !u!1 &2957064149181717386
 GameObject:
   m_ObjectHideFlags: 0

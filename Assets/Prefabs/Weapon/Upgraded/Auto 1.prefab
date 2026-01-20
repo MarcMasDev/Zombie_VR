@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 1450880937563476374}
   - component: {fileID: 1228383035315514609}
   - component: {fileID: 4917634285998787748}
+  - component: {fileID: 7326673769962850779}
   m_Layer: 0
   m_Name: Auto 1
   m_TagString: Weapon
@@ -509,7 +510,6 @@ MonoBehaviour:
   equippedWeapon: {fileID: 11400000, guid: 0d5441837c75f4341bb2b8478eef8046, type: 2}
   projectile: {fileID: 4095172493104798753, guid: e9b5a80ee7a61274aa80d87cf5939d1e, type: 3}
   recoil: {fileID: 8282624798894860713}
-  ammoPlacement: {fileID: 7926664418932585877}
   firePoints:
   - {fileID: 2175406848101993677}
   hapticData:
@@ -520,9 +520,20 @@ MonoBehaviour:
   shootAudio:
   - {fileID: 659137884731350935}
   - {fileID: 5273073453518480495}
-  reloadAudio: {fileID: 3679444363223440739}
   shootParticles: {fileID: 1134513166548708002}
-  reloadAction: {fileID: 5508348191298240105, guid: 3bf2864b2979c68438e3e3330e4fd782, type: 3}
+--- !u!114 &7326673769962850779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619067344975659413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc853a1a13915f46bae6824b6d78c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponID
+  id: 1
 --- !u!1 &875699845138486461
 GameObject:
   m_ObjectHideFlags: 0

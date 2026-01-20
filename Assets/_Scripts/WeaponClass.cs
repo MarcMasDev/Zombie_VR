@@ -24,5 +24,5 @@ public class WeaponClass : ScriptableObject
 
     [Header("Ammo")]
     public int magazineSize = 30;
-    public float reloadTime = 2f;
+    public int clips = 5;
 }

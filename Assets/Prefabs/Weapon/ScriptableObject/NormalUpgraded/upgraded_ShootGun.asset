@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f94f6c39e46eec242b8d8a50db8fcc18, type: 3}
   m_Name: upgraded_ShootGun
   m_EditorClassIdentifier: Assembly-CSharp::WeaponClass
-  weaponID: 6
   damage: 2000
   projectileSpeed: 30
   headshotMultiplier: 2
   limbMultiplier: 0.75
-  fireMode: 0
-  fireRate: 5
+  fireMode: 1
+  fireRate: 3
   burstCount: 3
   magazineSize: 12
   reloadTime: 2

@@ -1571,6 +1571,7 @@ GameObject:
   - component: {fileID: 574454789716258778}
   - component: {fileID: 2823753413765968825}
   - component: {fileID: 1807143404592451165}
+  - component: {fileID: 5210242494124609896}
   m_Layer: 0
   m_Name: Shotgun 1
   m_TagString: Weapon
@@ -1858,7 +1859,6 @@ MonoBehaviour:
   equippedWeapon: {fileID: 11400000, guid: 14029f0cbd7f3664e86d1298ac79dc4a, type: 2}
   projectile: {fileID: 4095172493104798753, guid: e9b5a80ee7a61274aa80d87cf5939d1e, type: 3}
   recoil: {fileID: 418698667731050974}
-  ammoPlacement: {fileID: 530936758601651147}
   firePoints:
   - {fileID: 3407144223988631481}
   - {fileID: 9032962273045702473}
@@ -1875,9 +1875,20 @@ MonoBehaviour:
   shootAudio:
   - {fileID: 8385021826229774274}
   - {fileID: 1210596210156763839}
-  reloadAudio: {fileID: 602584812856352231}
   shootParticles: {fileID: 8337676570041866324}
-  reloadAction: {fileID: 5508348191298240105, guid: 3bf2864b2979c68438e3e3330e4fd782, type: 3}
+--- !u!114 &5210242494124609896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6289871901223822312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc853a1a13915f46bae6824b6d78c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponID
+  id: 7
 --- !u!1 &6472443205058968034
 GameObject:
   m_ObjectHideFlags: 0

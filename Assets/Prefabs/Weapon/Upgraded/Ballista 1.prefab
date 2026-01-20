@@ -1603,6 +1603,7 @@ GameObject:
   - component: {fileID: 8871214496082081080}
   - component: {fileID: 3321121397601138759}
   - component: {fileID: 4279174349127627079}
+  - component: {fileID: 4806607858606333696}
   m_Layer: 0
   m_Name: Ballista 1
   m_TagString: Weapon
@@ -1884,7 +1885,6 @@ MonoBehaviour:
   equippedWeapon: {fileID: 11400000, guid: d2fca3db92e81424386061c353342113, type: 2}
   projectile: {fileID: 4095172493104798753, guid: e9b5a80ee7a61274aa80d87cf5939d1e, type: 3}
   recoil: {fileID: 5191602011361006370}
-  ammoPlacement: {fileID: 1695307385775474243}
   firePoints:
   - {fileID: 5611512325054830641}
   hapticData:
@@ -1895,9 +1895,20 @@ MonoBehaviour:
   shootAudio:
   - {fileID: 1293331169798289330}
   - {fileID: 5349188885293665904}
-  reloadAudio: {fileID: 2887250831948265535}
   shootParticles: {fileID: 2019349209529081966}
-  reloadAction: {fileID: 5508348191298240105, guid: 3bf2864b2979c68438e3e3330e4fd782, type: 3}
+--- !u!114 &4806607858606333696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4209786871047240863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc853a1a13915f46bae6824b6d78c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponID
+  id: 2
 --- !u!1 &4383013371241506777
 GameObject:
   m_ObjectHideFlags: 0

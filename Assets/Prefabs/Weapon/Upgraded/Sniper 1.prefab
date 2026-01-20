@@ -1149,6 +1149,7 @@ GameObject:
   - component: {fileID: 616997298466418917}
   - component: {fileID: 1943777512128850818}
   - component: {fileID: 5535943109151174602}
+  - component: {fileID: 4722936632255666695}
   m_Layer: 0
   m_Name: Sniper 1
   m_TagString: Weapon
@@ -1430,7 +1431,6 @@ MonoBehaviour:
   equippedWeapon: {fileID: 11400000, guid: e99ce6cbe92aa1146baed09b94c3dfcd, type: 2}
   projectile: {fileID: 4095172493104798753, guid: e9b5a80ee7a61274aa80d87cf5939d1e, type: 3}
   recoil: {fileID: 5907427246899282105}
-  ammoPlacement: {fileID: 4251895410023222042}
   firePoints:
   - {fileID: 8260846786019766426}
   hapticData:
@@ -1441,9 +1441,20 @@ MonoBehaviour:
   shootAudio:
   - {fileID: 5059994248830685706}
   - {fileID: 1590496243958408293}
-  reloadAudio: {fileID: 8421248902206963666}
   shootParticles: {fileID: 6288044204742598211}
-  reloadAction: {fileID: 5508348191298240105, guid: 3bf2864b2979c68438e3e3330e4fd782, type: 3}
+--- !u!114 &4722936632255666695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3903315801549119458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc853a1a13915f46bae6824b6d78c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponID
+  id: 8
 --- !u!1 &4086032139706505119
 GameObject:
   m_ObjectHideFlags: 0

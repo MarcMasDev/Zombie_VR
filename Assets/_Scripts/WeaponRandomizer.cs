@@ -13,8 +13,13 @@ public class WeaponRandomizer : MonoBehaviour
 
     [Header("Spawn")]
     [SerializeField] private GameObject[] weaponsToSpawn;
+    [SerializeField] private GameObject[] ammoToSpawn;
+    [SerializeField] private GameObject ammoCounter;
     [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Transform[] spawnPointsAmmo;
+    [SerializeField] private Transform ammoCounterSpawnPoint;
     [SerializeField] private float spawnForce = 5f;
+    [SerializeField] private int magazinesToSpawn = 3;
 
     private int index = 0;
     private bool randomizing = false;
@@ -22,14 +27,12 @@ public class WeaponRandomizer : MonoBehaviour
     {
         if (randomizing) return;
 
-        print("START");
         randomizing = true;
         index = Random.Range(0, weaponsVisuals.Length);
         StartCoroutine(ShowRandomWeapons());
     }
     public void EndRandomize()
     {
-        print("END");
         randomizing = false;
         SpawnRandomWeapon();
     }
@@ -53,10 +56,21 @@ public class WeaponRandomizer : MonoBehaviour
     private void SpawnRandomWeapon()
     {
         weaponsVisuals[index].SetActive(false);
-        Rigidbody weapon = Instantiate(weaponsToSpawn[index], 
-            spawnPoint.position, spawnPoint.rotation).GetComponent<Rigidbody>();
-
+       
+        Rigidbody weapon = Instantiate(weaponsToSpawn[index], spawnPoint.position, spawnPoint.rotation).GetComponent<Rigidbody>();
         weapon.linearVelocity = spawnPoint.forward * spawnForce;
+
+        for (int i = 0; i < magazinesToSpawn; i++)
+        {
+            if (ammoToSpawn[index] == null) break;
+
+            Rigidbody ammo = Instantiate(ammoToSpawn[index], spawnPointsAmmo[i].position, spawnPoint.rotation).GetComponent<Rigidbody>();
+            if (ammo != null) ammo.linearVelocity = spawnPointsAmmo[i].forward * spawnForce;
+        }
+
+        Rigidbody ammoCount = Instantiate(ammoCounter, ammoCounterSpawnPoint.position, ammoCounterSpawnPoint.rotation).GetComponent<Rigidbody>();
+        ammoCount.linearVelocity = ammoCounterSpawnPoint.forward * spawnForce;
+
         purchasable.SetAnimators(false);
     }
 }

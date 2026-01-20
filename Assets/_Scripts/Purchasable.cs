@@ -7,6 +7,8 @@ public class Purchasable : MonoBehaviour
     [SerializeField] private TMP_Text costDisplay;
 
     [SerializeField] private Animator[] anim;
+    [SerializeField] private bool onlyOnce = false;
+    private bool onlyOnceTrigger = false;
     public bool waitForAction = false;
 
     private void Awake()
@@ -25,6 +27,9 @@ public class Purchasable : MonoBehaviour
     }
     public void SetAnimators(bool purchased)
     {
+        if (onlyOnce && onlyOnceTrigger) return;
+        else onlyOnceTrigger = true;
+
         for (int i = 0; i < anim.Length; i++)
         {
             anim[i].SetBool("Purchase", purchased);

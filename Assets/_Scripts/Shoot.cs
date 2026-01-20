@@ -1,26 +1,24 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Feedback;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
-
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 public class Shoot : MonoBehaviour
 {
     [Header("Weapon Settings")]
     [SerializeField] private WeaponClass equippedWeapon;
     [SerializeField] private Projectile projectile;
     [SerializeField] private GunRecoil recoil;
-    [SerializeField] private Transform ammoPlacement;
+    private AmmoParent ammoPlacement = null;
     [SerializeField] private Transform[] firePoints;
     private WeaponID id;
+    private Magazine currentMagazine;
 
     [Header("Haptic Settings")]
     [SerializeField] private HapticImpulseData hapticData;
     private XRGrabInteractable controller;
 
-    private int currentAmmo;
-    private bool isReloading;
     private bool isFiring;
 
     private float nextFireTime;
@@ -28,23 +26,18 @@ public class Shoot : MonoBehaviour
     [Header("Audio Settings")]
     [SerializeField] private AudioSource emptyMagAudio;
     [SerializeField] private AudioSource[] shootAudio;
-    [SerializeField] private AudioSource reloadAudio;
 
     [Header("Particle Settings")]
     [SerializeField] private ParticleSystem shootParticles;
     private bool grabbed = false;
     private void Awake()
     {
-        currentAmmo = equippedWeapon.magazineSize;
         controller = GetComponent<XRGrabInteractable>();
         id = GetComponent<WeaponID>();
     }
 
     public void OnTriggerPressed()
     {
-        if (isReloading)
-            return;
-
         switch (equippedWeapon.fireMode)
         {
             case FireMode.SemiAuto:
@@ -83,7 +76,7 @@ public class Shoot : MonoBehaviour
     private void ShootWeapon()
     {
         if (Time.time < nextFireTime) return;
-        if (currentAmmo <= 0)
+        if (HasNoAmmo())
         {
             emptyMagAudio.Play();
             return;
@@ -95,7 +88,7 @@ public class Shoot : MonoBehaviour
             spawnedProjectile.Fire(equippedWeapon, firePoints[i].forward);
         }
 
-        currentAmmo--;
+        currentMagazine.ConsumeBullet();
         UpdateAmmoVisuals();
 
         //Feedback
@@ -118,7 +111,7 @@ public class Shoot : MonoBehaviour
 
         for (int i = 0; i < equippedWeapon.burstCount; i++)
         {
-            if (currentAmmo <= 0)
+            if (HasNoAmmo())
                 break;
 
             ShootWeapon();
@@ -150,7 +143,7 @@ public class Shoot : MonoBehaviour
 
     void SendHaptics()
     {
-        float ammoRatio = (float)currentAmmo / equippedWeapon.magazineSize;
+        float ammoRatio = (float)GetAmmo() / equippedWeapon.magazineSize;
 
         foreach (var interactor in controller.interactorsSelecting)
         {
@@ -164,71 +157,76 @@ public class Shoot : MonoBehaviour
         }
     }
 
-    [SerializeField] private InputActionReference reloadAction;
-
-    private void OnEnable()
+    public void OnMagazineInserted(SelectEnterEventArgs args)
     {
-        reloadAction.action.Enable();
-    }
-
-    private void OnDisable()
-    {
-        reloadAction.action.Disable();
-    }
-
-    private void Update()
-    {
-        if (grabbed && !isReloading && currentAmmo < equippedWeapon.magazineSize)
-        {
-            if (reloadAction.action.WasPressedThisFrame() || currentAmmo <= 0) Reload();
-        }
-    }
-
-    public void Reload()
-    {
-        if (isReloading)
-            return;
-
-        StartCoroutine(ReloadAsync());
-    }
-    private IEnumerator ReloadAsync()
-    {
-        isReloading = true;
-        reloadAudio.Play();
-
-        yield return new WaitForSeconds(equippedWeapon.reloadTime);
-
-        currentAmmo = equippedWeapon.magazineSize;
+        currentMagazine = args.interactableObject.transform.GetComponent<Magazine>();
         UpdateAmmoVisuals();
-        isReloading = false;
     }
 
-    private int grabHandsAmount = 0;
-    public void ApplyAmmoVisuals(bool dropped = false)
+    public void OnMagazineRemoved(SelectExitEventArgs args)
     {
-        grabbed = !dropped;
-        if (grabbed)
+        currentMagazine = null;
+        UpdateAmmoVisuals();
+    }
+
+    private int hands = 0;
+    public void OnGrab(SelectEnterEventArgs args)
+    {
+        hands = Mathf.Min(hands + 1, 2);
+        if (hands > 1) return;
+
+        grabbed = true;
+
+        XRBaseInteractor player = args.interactorObject as XRBaseInteractor; 
+        BeltAmmo.Instance.SetAmmo(grabbed, id, player.gameObject.CompareTag("LeftHand"));
+
+        OnGrabVisuals();
+    }
+    public void OnExitGrab(SelectExitEventArgs args)
+    {
+        hands = Mathf.Max(hands - 1, 0);
+        if (hands > 0) return;
+
+        grabbed = false; 
+        XRBaseInteractor player = args.interactorObject as XRBaseInteractor;
+        BeltAmmo.Instance.SetAmmo(grabbed, id, player.gameObject.CompareTag("LeftHand"));
+        OnGrabVisuals();
+    }
+    private void OnGrabVisuals()
+    {
+        GameManager.Instance.GrabbedGun(grabbed);
+
+        if (ammoPlacement != null)
         {
-            if (grabHandsAmount <= 0)
-            {
-                grabHandsAmount = 1;
-                AmmoManager.Instance.UpdateAmmoManager(currentAmmo, equippedWeapon.magazineSize, id, ammoPlacement);
-            }
-            grabHandsAmount++;
-        }
-        else
-        {
-            grabHandsAmount--;
-            if (grabHandsAmount <= 1)
-            {
-                grabHandsAmount = 0;
-                AmmoManager.Instance.ResetParent(id);
-            }
+            ammoPlacement.SetColliders(grabbed);
+            ammoPlacement.SetAmmo(GetAmmo(), equippedWeapon.magazineSize);
         }
     }
 
     public void UpdateAmmoVisuals()
     {
-        AmmoManager.Instance.UpdateAmmoManager(currentAmmo, equippedWeapon.magazineSize, id);
+        if (ammoPlacement != null) ammoPlacement.SetAmmo(GetAmmo(), equippedWeapon.magazineSize);
+    }
+
+    private bool HasNoAmmo()
+    {
+        return currentMagazine == null || !currentMagazine.HasAmmo();
+    }
+
+    private int GetAmmo()
+    {
+        if (currentMagazine != null)
+            return currentMagazine.CurrentAmmo;
+
+        return 0;
+    }
+    public void AddAmmoVisuals(SelectEnterEventArgs m)
+    {
+        ammoPlacement = m.interactableObject.transform.gameObject.GetComponentInChildren<AmmoParent>();
+        if (ammoPlacement) ammoPlacement.SetAmmo(GetAmmo(), equippedWeapon.magazineSize);
+    }
+    public void RemoveAmmoVisuals()
+    {
+        ammoPlacement = null;
     }
 }
